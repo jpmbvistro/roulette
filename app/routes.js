@@ -66,7 +66,7 @@ let roll = function(){
 
     app.get('/management', isLoggedIn, (req, res)=>{
       db.collection('bets').find().toArray((err,result)=>{
-        let totalLoss = results.reduce((acc, current)=>acc+current.winnings)
+        let totalLoss = result.reduce((acc, current)=>acc+current.winnings)
         if(err) return console.log(err)
         res.render('management.ejs', {
           bets:result

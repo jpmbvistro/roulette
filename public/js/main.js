@@ -8,9 +8,50 @@ document.querySelector('#hide-overlay').addEventListener('click', element => {
   document.querySelector('.login-overlay').classList.remove('show')
 })
 
+const boardTranslation = {
+  32:360/37*1,
+  15:360/37*2,
+  19:360/37*3,
+  4:360/37*4,
+  21:360/37*5,
+  2:360/37*6,
+  25:360/37*7,
+  17:360/37*8,
+  34:360/37*9,
+  6:360/37*10,
+  27:360/37*11,
+  13:360/37*12,
+  36:360/37*13,
+  11:360/37*14,
+  30:360/37*15,
+  8:360/37*16,
+  23:360/37*17,
+  10:360/37*18,
+  5:360/37*19,
+  24:360/37*20,
+  16:360/37*21,
+  33:360/37*22,
+  1:360/37*23,
+  20:360/37*24,
+  14:360/37*25,
+  31:360/37*26,
+  9:360/37*27,
+  22:360/37*28,
+  18:360/37*29,
+  29:360/37*30,
+  7:360/37*31,
+  28:360/37*32,
+  12:360/37*33,
+  35:360/37*34,
+  3:360/37*35,
+  26:360/37*36,
+}
+
 //submit bet
 document.querySelector('#submitBet').addEventListener('click', element => {
   if(document.querySelector("input[name='name']").value){
+    document.querySelector('.roulette-board-container').style.transition = '0s'
+    document.querySelector('.roulette-board-container').style.transform = 'rotate(0deg)'
     document.querySelector('.prompt-message').innerText = ''
     let singleDOMBets = Array.from(document.querySelectorAll('.singleBet.locked'))
     let singleBets = {}
@@ -35,7 +76,7 @@ document.querySelector('#submitBet').addEventListener('click', element => {
         firstCBet: document.querySelector("input[name='bet-first-column']").value,
         secondCBet: document.querySelector("input[name='bet-second-column']").value,
         thirdCBet: document.querySelector("input[name='bet-third-column']").value,
-        'singleBets': singleBets 
+        'singleBets': singleBets
       })
     })
     .then(response => {
@@ -46,6 +87,10 @@ document.querySelector('#submitBet').addEventListener('click', element => {
       let winningsElement = document.querySelector('.winnings')
       winningsElement.innerText = Number(winningsElement.innerText)+Number(data.winnings)
       document.querySelector('.result').innerText = " "+ data.number +" "+ data.color
+      document.querySelector('.roulette-board-container').style.transition = 'all 3s ease-out'
+      console.log(`Degrees: ${boardTranslation[data.number]}`)
+      document.querySelector('.roulette-board-container').style.transform = `rotate(${1080+(360-boardTranslation[data.number])}deg)`
+
     })
   } else {
     document.querySelector('.prompt-message').innerText = 'Name required!'
