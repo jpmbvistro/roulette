@@ -9,10 +9,13 @@ require('dotenv').config()
 
 const MongoClient = require('mongodb').MongoClient
 var mongoose = require('mongoose');
-// var passport = require('passport');
-// var flash    = require('connect-flash');
+var passport = require('passport');
+var flash    = require('connect-flash');
 var uniqid  = require('uniqid')
+var ObjectId = require('mongodb').ObjectID
 var morgan       = require('morgan');
+var bodyParser   = require('body-parser')
+var session      = require('express-session');
 
 
 const DB_NAME = process.env.DB_NAME
@@ -28,8 +31,10 @@ var db
 mongoose.connect(DB_URL, (err, database) => {
   if (err) return console.log(err)
   db = database
-  require('./app/routes.js')(app, db, uniqid);
+  require('./app/routes.js')(app, db, passport, uniqid, ObjectId);
 });
+
+require('./config/passport')(passport); // pass passport for configuration
 
 /******************************
 =========Express Setup=========
@@ -37,11 +42,22 @@ mongoose.connect(DB_URL, (err, database) => {
 
 app.use(express.static('public'))
 app.use(morgan('dev'))
-
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs')
 
-
-
+/******************************
+=========Passport Setup=========
+*******************************/
+// required for passport
+app.use(session({
+    secret: 'whatsThisFor', // session secret
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
 
 
 // launch ======================================================================

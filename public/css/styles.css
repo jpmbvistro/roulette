@@ -24,6 +24,10 @@
 ===Base Styles====
 *******************/
 
+button {
+  cursor: pointer;
+}
+
 h1{
   text-transform: uppercase;
   font-size: min(15vw,3rem);
@@ -41,7 +45,7 @@ h2 {
 }
 
 h3 {
-  font-size: min(5vw,3rem);
+  font-size: min(5vw,1.3rem);
   /* text-align: center; */
 }
 
@@ -133,7 +137,7 @@ Side info panel
 ***************/
 
 /**Info Button Styling**/
-/* .info-button {
+.info-button {
   background-color: rgba(255,255, 255,.3);
   border: none;
   padding: 0 1rem .5rem 1rem;
@@ -159,7 +163,7 @@ Side info panel
 
 .info-button:active {
   box-shadow: inset 0 0 3px 0px rgba(0,0,0,.7);
-} */
+}
 /**End Info Button styling*/
 
 /*Aside Styling*/
@@ -337,8 +341,15 @@ Custom Layout Below
   margin-top: 1.5rem;
 }
 
+.payout-group {
+  margin: 1rem;
+}
 
 
+table {
+  border-spacing: 1rem;
+  border-collapse: separate;
+}
 
 /************************
 ===Additional Styling====
@@ -348,12 +359,12 @@ Custom Layout Below
   /* padding: 1rem min(3rem, 2vw); */
   border-radius: 1rem;
   position: relative;
-  width: clamp(10rem, 100vw, 30rem);
-
-  height: clamp(10rem, 100vh, 40rem);
-
+  width: clamp(10rem, 100vw, 1200px);
+  padding:  min(2rem, 5vw);
 
 }
+
+
 body {
   display: flex;
   align-items: center;
@@ -657,6 +668,67 @@ li + li{
 /***********************************
 ==========Custom Components=========
 ************************************/
+
+.login-overlay {
+
+  /* backdrop-filter: blur(4px); */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all .4s ease;
+  opacity: 0;
+  transform: translateY(100%);
+  z-index: 2;
+}
+
+.login-overlay h2,
+.login-overlay p ,
+.login-overlay a{
+  color: white;
+}
+
+.login-overlay::before {
+  background-color: rgba(41,41,41,.99);
+  position: absolute;
+  content: '';
+  width:100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  /* filter:blur(5rem); */
+  z-index: -1;
+}
+
+.login-overlay.show{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.form-group {
+  margin: 2rem;
+}
+
+input[type='number'] {
+  background: none;
+  border: none;
+}
+
+label {
+  padding: .5rem;
+  background-color: white;
+  border-radius: .5rem;
+  margin: .25rem;
+}
+
+.roulette-board {
+  background-color: rgba(255, 147, 89,1);
+  border-radius: 50%;
+  padding: 1rem;
+  max-width: 50px;
+}
+
 .aid-filters button {
   background: white;
   border: none;

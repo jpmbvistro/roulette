@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <section class='main flex-container flex-column'>
+      <h1>Roulette Winnings!</h1>
+      <table>
+        <% if(bets) { %>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Takeaway</th>
+          </tr>
+        </thead>
+        <tbody>
+
+            <% for(let i = 0 ; i<bets.length;i++) { %>
+            <tr>
+              <td><%= bets[i].name%></td>
+              <td><%= bets[i].winnings%></td>
+
+            </tr>
+            <% } %>
+
+        </tbody>
+        <% } %>
+      </table>
+      <a href='/' class='info-button' type="button" name="button">
+        &larrhk;
+      </a>
+    </section>
+  </body>
+</html>

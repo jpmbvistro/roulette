@@ -4,35 +4,122 @@
   <body>
     <section class='main flex-container flex-column'>
       <h1>Roulette!</h1>
-      <section class='winnings-display flex-container'>
-        <h2>Total Winnings: $<span class='winnings'></span></h2>
+      <section class='winnings-display'>
+        <h2>Total Winnings: $<span class='winnings'>0</span></h2>
+        <h3>Result: <span class='result'></span></h3>
+        <span class='prompt-message'></span>
       </section>
-      <section class='flex-container game panel'>
+      <section class='flex-container game-panel flex-xy-center'>
         <section class='bets flex-container flex-column'>
-          <div class="bet-container">
+          <div class="bet-container payout-group">
+            <label for="">
+              Name:
+              <input type="text" name="name" placeholder="What's Your Name?" required value="">
+            </label>
             <button id='submitBet' class='submit-bet' type="submit" name="button">Submit</button>
           </div>
-          <div class="color">
-            <h3>2-1</h3>
-            <div class="flex-container">
+          <div class="one-one payout-group">
+            <h3>Payout: 1-1</h3>
+            <div class="flex-container color bet-group">
               <label for="bet-black">
                 Black:
-                <input type="number" name="bet-black" placeholder='Bet on Black' value="" min='.01'>
+                <input type="number" name="bet-black" placeholder='Bet on Black' value="" min='0'>
               </label>
               <label for="bet-red">
                 Red:
-                <input type="number" name="bet-red" placeholder='Bet on red' value="" min='.01'>
+                <input type="number" name="bet-red" placeholder='Bet on red' value="" min='0'>
+              </label>
+            </div>
+            <div class="flex-container even-odd ">
+              <label for="bet-even">
+                Even:
+                <input type="number" name="bet-even" placeholder='Bet on Even' value="" min='0'>
+              </label>
+              <label for="bet-odd">
+                Odd:
+                <input type="number" name="bet-odd" placeholder='Bet on Odd' value="" min='0'>
               </label>
             </div>
           </div>
+          <div class="two-one payout-group">
+            <h3>Payout: 2-1</h3>
+            <div class="flex-container dozen">
+              <label for="bet-first-dozen">
+                1st 12:
+                <input type="number" name="bet-first-dozen" placeholder='Bet on 1st 12' value="" min='0'>
+              </label>
+              <label for="bet-second-dozen">
+                2nd 12:
+                <input type="number" name="bet-second-dozen" placeholder='Bet on 2nd 12' value="" min='0'>
+              </label>
+              <label for="bet-third-dozen">
+                3rd 12:
+                <input type="number" name="bet-third-dozen" placeholder='Bet on 3rd 12' value="" min='0'>
+              </label>
+            </div>
+            <div class="flex-container column">
+              <label for="bet-first-column">
+                First Column:
+                <input type="number" name="bet-first-column" placeholder='Bet on 1st column' value="" min='0'>
+              </label>
+              <label for="bet-second-column">
+                Second Column:
+                <input type="number" name="bet-second-column" placeholder='Bet on 2nd column' value="" min='0'>
+              </label>
+              <label for="bet-third-column">
+                Third Column:
+                <input type="number" name="bet-third-column" placeholder='Bet on 3rd column' value="" min='0'>
+              </label>
+            </div>
+          </div>
+          <div class="thirtyfive-one payout-group">
+            <h3>Payout: 35-1</h3>
+            <table id='soloNumbers' class='solo-numbers'>
+              <thead>
+                <tr>
+                  <th><button id='addSingle' class='' type="button" name="button">+</button></th>
+                  <th>#</th>
+                  <th>Bet</th>
+                </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
+          </div>
+
         </section>
         <section class='roulette-board'>
           <img src="img/game.png" alt="boardgame">
         </section>
       </section>
       <div class="admin-login">
-        <button id='admin-login-button' class='admin-login-button' type="button" name="button"></button>
+        <button id='admin-login-button' class='admin-login-button info-button' type="button" name="button">...</button>
+      </div>
+      <div class="login-overlay flex-container flex-column flex-xy-center">
+        <button id='hide-overlay' class='hide-overlay' type="button" name="button">&larrhk;</button>
+        <h2>Management Login</h2>
+        <% if (message.length > 0) { %>
+            <div class="alert alert-danger"><%= message %></div>
+        <% } %>
+        <!-- LOGIN FORM -->
+        <form action="/login" method="post">
+            <div class="form-group">
+                <label>Email <input type="text" class="form-control" name="email"></label>
+
+            </div>
+            <div class="form-group">
+                <label>Password <input type="password" class="form-control" name="password"></label>
+
+            </div>
+
+            <button type="submit" class="btn btn-warning btn-lg">Login</button>
+        </form>
+        <p>Need an account? <a href="/signup">Signup</a></p>
       </div>
     </section>
+    <script type="text/javascript" src='js/main.js'>
+
+    </script>
   </body>
 </html>
